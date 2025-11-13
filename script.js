@@ -1,4 +1,4 @@
-// --- CART FUNCTIONALITY ---
+// --- CART FUNCTIONALITY --
 let cart = JSON.parse(localStorage.getItem('cart')) || [];
 
 function addToCart(name, price) {
@@ -85,7 +85,6 @@ function printReceipt() {
     myWindow.print();
 }
 
-// --- PROFILE FUNCTIONALITY ---
 let user = JSON.parse(localStorage.getItem('user')) || {
     name: 'John Doe',
     email: 'johndoe@example.com',
@@ -118,7 +117,6 @@ function saveProfile(e){
     window.location.href = 'profile.html';
 }
 
-// --- INITIALIZE ---
 document.addEventListener('DOMContentLoaded', () => {
     loadCart();
     updateCheckout();
@@ -127,3 +125,4 @@ document.addEventListener('DOMContentLoaded', () => {
     const editForm = document.getElementById('editForm');
     if(editForm) editForm.addEventListener('submit', saveProfile);
 });
+
