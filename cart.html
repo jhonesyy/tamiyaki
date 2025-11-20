@@ -5,9 +5,9 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Cart - Tamiyaki Takoyaki</title>
 <link rel="stylesheet" href="style.css">
-<script defer src="script.js"></script>
 </head>
 <body>
+
 <header>
     <h1>Cart</h1>
     <nav>
@@ -23,8 +23,37 @@
 <main>
 <section id="cart-container">
     <h2>Your Cart</h2>
-    <div id="cart-items"></div>
-    <p id="total">Total: ₱0</p>
+
+    <div class="cart-item">
+        <label>Item Name:</label>
+        <input type="text" placeholder="Classic Takoyaki">
+
+        <label>Price:</label>
+        <input type="text" value="₱50">
+
+        <label>Quantity:</label>
+        <input type="number" placeholder="0">
+
+        <label>Subtotal:</label>
+        <input type="text" placeholder="₱0">
+    </div>
+
+    <div class="cart-item">
+        <label>Item Name:</label>
+        <input type="text" placeholder="Cheesy Takoyaki">
+
+        <label>Price:</label>
+        <input type="text" value="₱60">
+
+        <label>Quantity:</label>
+        <input type="number" placeholder="0">
+
+        <label>Subtotal:</label>
+        <input type="text" placeholder="₱0">
+    </div>
+
+    <p id="total">Total: <input type="text" placeholder="₱0"></p>
+
     <a class="btn" href="checkout.html">Proceed to Checkout</a>
 </section>
 </main>
@@ -32,5 +61,6 @@
 <footer>
     <p>&copy; 2025 Tamiyaki Takoyaki</p>
 </footer>
+
 </body>
 </html>
