@@ -5,9 +5,9 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Menu - Tamiyaki Takoyaki</title>
 <link rel="stylesheet" href="style.css">
-<script defer src="script.js"></script>
 </head>
 <body>
+
 <header>
     <h1>Menu</h1>
     <nav>
@@ -21,43 +21,43 @@
 </header>
 
 <main>
-<section class="menu-items">
-    <div class="menu-item">
-        <img src="images/takoyaki1.jpg" alt="Classic Takoyaki">
-        <h4>Classic Takoyaki</h4>
-        <p>₱100 / 6 pcs</p>
-        <button onclick="addToCart('Classic Takoyaki',100)">Add to Cart</button>
+<section class="menu-container">
+
+    <div class="product">
+        <img src="takoyaki.jpg" alt="Takoyaki">
+        <h3>Classic Takoyaki</h3>
+        <p>₱50</p>
+        <label>Quantity:</label>
+        <input type="number" min="0" placeholder="0">
     </div>
-    <div class="menu-item">
-        <img src="images/takoyaki2.jpg" alt="Cheese Takoyaki">
-        <h4>Cheese Takoyaki</h4>
-        <p>₱120 / 6 pcs</p>
-        <button onclick="addToCart('Cheese Takoyaki',120)">Add to Cart</button>
+
+    <div class="product">
+        <img src="cheese.jpg" alt="Cheese">
+        <h3>Cheesy Takoyaki</h3>
+        <p>₱60</p>
+        <label>Quantity:</label>
+        <input type="number" min="0" placeholder="0">
     </div>
-    <div class="menu-item">
-        <img src="images/takoyaki2.jpg" alt="Spicy Takoyaki">
-        <h4>Spicy Takoyaki</h4>
-        <p>₱115 / 6 pcs</p>
-        <button onclick="addToCart('Spicy Takoyaki',115)">Add to Cart</button>
-    </div>
-    <div class="menu-item">
-        <img src="images/takoyaki2.jpg" alt="Overload Takoyaki">
-        <h4>Overload Takoyaki</h4>
-        <p>₱140 / 6 pcs</p>
-        <button onclick="addToCart('Overload Takoyaki',140)">Add to Cart</button>
-    </div>
-    <div class="menu-item">
-        <img src="images/takoyaki2.jpg" alt="Overload Takoyaki">
-        <h4>Ultra Takoyaki</h4>
-        <p>₱155 / 6 pcs</p>
-        <button onclick="addToCart('Ultra Takoyaki',155)">Add to Cart</button>
+
+    <div class="product">
+        <img src="spicy.jpg" alt="Spicy">
+        <h3>Spicy Takoyaki</h3>
+        <p>₱65</p>
+        <label>Quantity:</label>
+        <input type="number" min="0" placeholder="0">
     </div>
 
 </section>
+
+<p style="text-align:center;">
+    <a class="btn" href="cart.html">Go to Cart</a>
+</p>
+
 </main>
 
 <footer>
     <p>&copy; 2025 Tamiyaki Takoyaki</p>
 </footer>
+
 </body>
 </html>
