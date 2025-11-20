@@ -1,128 +1,223 @@
-// --- CART FUNCTIONALITY --
-let cart = JSON.parse(localStorage.getItem('cart')) || [];
-
-function addToCart(name, price) {
-    let item = cart.find(i => i.name === name);
-    if (item) item.qty++;
-    else cart.push({ name, price, qty: 1 });
-    localStorage.setItem('cart', JSON.stringify(cart));
-    alert(`${name} added to cart!`);
-    loadCart();
-    updateCheckout();
+/* Reset & base */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
 }
 
-function loadCart() {
-    const container = document.getElementById('cart-items');
-    if (!container) return;
-    container.innerHTML = '';
-    let total = 0;
-    cart.forEach(item => {
-        total += item.price * item.qty;
-        const div = document.createElement('div');
-        div.className = 'cart-item';
-        div.innerHTML = `
-            ${item.name} - ₱${item.price} x ${item.qty} 
-            <button onclick="removeFromCart('${item.name}')">Remove</button>
-        `;
-        container.appendChild(div);
-    });
-    const totalElem = document.getElementById('total');
-    if(totalElem) totalElem.innerText = `Total: ₱${total}`;
+body {
+    background-color: #ffeeee; /* Light background */
+    color: #333;
+    line-height: 1.6;
 }
 
-function removeFromCart(name) {
-    cart = cart.filter(i => i.name !== name);
-    localStorage.setItem('cart', JSON.stringify(cart));
-    loadCart();
-    updateCheckout();
+/* --- HEADER/NAV (COLORS KEPT) --- */
+header {
+    /* BACKGROUND COLOR REVERTED TO ORIGINAL: #ff6347 */
+    background-color: #110300; 
+    color: #fff;
+    padding: 15px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    /* Added thick top and bottom lines to match the sketch look */
+    border-top: 3px solid #333; 
+    border-bottom: 3px solid #333;
+    margin-bottom: 20px;
 }
 
-function updateCheckout() {
-    const container = document.getElementById('checkout-items');
-    if (!container) return;
-    container.innerHTML = '';
-    let total = 0;
-    cart.forEach(item => {
-        total += item.price * item.qty;
-        const div = document.createElement('div');
-        div.innerText = `${item.name} - ₱${item.price} x ${item.qty}`;
-        container.appendChild(div);
-    });
-    const totalElem = document.getElementById('checkout-total');
-    if(totalElem) totalElem.innerText = `Total: ₱${total}`;
+header h1 {
+    font-size: 2rem;
+    letter-spacing: 2px;
 }
 
-function completeOrder() {
-    if(cart.length === 0){
-        alert("Your cart is empty!");
-        return;
+nav a {
+    /* Text color changed to white to contrast with the background */
+    color: #fff; 
+    margin-left: 20px;
+    text-decoration: none;
+    font-weight: normal;
+    text-transform: uppercase;
+    font-size: 1.2rem;
+}
+
+nav a:hover {
+    text-decoration: underline;
+}
+
+main {
+    padding: 0 20px; /* Adjust padding for better flow */
+}
+
+/* --- HERO/BANNER (Section 1 - COLORS KEPT) --- */
+.hero-sketch {
+    text-align: center;
+    padding: 40px 20px;
+    /* BACKGROUND COLOR REVERTED TO ORIGINAL: #ffe4e1 */
+    background-color: #ffffff;
+    margin-bottom: 30px;
+}
+
+.hero-content {
+    font-size: 3rem;
+    margin-bottom: 30px;
+    /* Simulate the squiggly lines with wavy text or simple lines */
+    padding: 30px 0;
+    border-top: 1px solid #333;
+    border-bottom: 1px solid #333;
+    width: 80%;
+    margin: 20px auto;
+    font-family: fantasy;
+}
+
+.DJSF {
+    font-family: monospace;
+}
+
+.btn-sketch {
+    /* Style for the 'VIEW MENU' button */
+    display: inline-block;
+    background-color: #000000; /* Use original button color */
+    color: #fff;
+    padding: 8px 15px;
+    text-decoration: none;
+    border: none; 
+    border-radius: 5px;
+    font-weight: bold;
+    transition: 0.3s;
+    cursor: pointer;
+    text-transform: uppercase;
+}
+
+.btn-sketch:hover {
+    background-color: #fff3f1;
+    color:#000000;
+    border:#110300;
+}
+
+/* --- PROCESS & INFORMATION (Section 2) --- */
+.process-info-container {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 30px;
+}
+
+.process-section, .information-section {
+    width: 48%; /* Almost half each */
+    padding: 15px;
+    border: 1px solid #333; /* Box outline from sketch */
+}
+
+.process-section h3 {
+    /* Simulating the rounded 'Process' text box */
+    display: inline-block;
+    padding: 5px 10px;
+    border: 1px solid #333;
+    border-radius: 15px;
+    margin-bottom: 15px;
+}
+
+.information-section h3 {
+    /* Simulating the corner-cut 'Information' box */
+    display: inline-block;
+    padding: 5px 10px;
+    border: 1px solid #333;
+    margin-bottom: 15px;
+}
+
+.process-section ol {
+    list-style-type: none; /* Remove default list style */
+    padding-left: 0;
+}
+
+.process-section li {
+    margin-bottom: 10px;
+    position: relative;
+    padding-left: 30px;
+}
+
+/* Custom list numbers to match the circle style in the sketch */
+.process-section li::before {
+    content: attr(value);
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 20px;
+    height: 20px;
+    border: 1px solid #333;
+    border-radius: 50%;
+    text-align: center;
+    line-height: 18px;
+    font-size: 0.8rem;
+}
+
+
+/* --- FEATURED ITEMS (Section 3) --- */
+.featured-sketch {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.featured-item-box {
+    display: flex; 
+    border: 1px solid #333;
+    padding: 10px;
+}
+
+.item-content {
+    width: 65%; /* Adjusted width */
+    padding-right: 15px;
+}
+
+.item-skill {
+    width: 35%; /* Adjusted width */
+    border: 1px solid #333; 
+    text-align: center;
+    padding: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.item-content h4 {
+    margin-bottom: 5px;
+    padding-bottom: 5px;
+    font-size: 1.1rem;
+}
+
+.pic-info {
+    font-size: 0.9rem;
+    color: #333;
+}
+
+.another-placeholder {
+    border: 1px solid #333;
+    padding: 20px;
+    text-align: center;
+    margin-top: 10px;
+}
+
+/* --- FOOTER --- */
+footer {
+    text-align: center;
+    padding: 15px 20px;
+    border-top: 1px solid #333;
+    margin-top: 30px;
+    font-size: 0.8rem;
+    background-color: #000000;
+    color: #ffeeee;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .process-info-container {
+        flex-direction: column;
     }
-    const method = document.getElementById('payment-method').value;
-    const receiptDiv = document.getElementById('receipt');
-    const receiptContent = document.getElementById('receipt-content');
 
-    const total = cart.reduce((sum, i) => sum + i.price*i.qty, 0);
-    const itemsList = cart.map(i => `${i.name} x ${i.qty} - ₱${i.price*i.qty}`).join('<br>');
-
-    receiptContent.innerHTML = `
-        <strong>Payment Method:</strong> ${method}<br>
-        <strong>Items:</strong><br>${itemsList}<br>
-        <strong>Total:</strong> ₱${total}<br>
-        <strong>Thank you for ordering!</strong>
-    `;
-    receiptDiv.style.display = 'block';
-    cart = [];
-    localStorage.removeItem('cart');
-    loadCart();
-    updateCheckout();
+    .process-section, .information-section {
+        width: 100%;
+        margin-bottom: 20px;
+    }
 }
-
-function printReceipt() {
-    const content = document.getElementById('receipt-content').innerHTML;
-    const myWindow = window.open('', '', 'width=400,height=600');
-    myWindow.document.write(`<html><body>${content}</body></html>`);
-    myWindow.document.close();
-    myWindow.print();
-}
-
-let user = JSON.parse(localStorage.getItem('user')) || {
-    name: 'John Doe',
-    email: 'johndoe@example.com',
-    address: '123 Street, Tanay, Rizal'
-};
-
-function loadProfile() {
-    const nameElem = document.getElementById('profile-name');
-    const emailElem = document.getElementById('profile-email');
-    const addressElem = document.getElementById('profile-address');
-    if(nameElem) nameElem.innerText = user.name;
-    if(emailElem) emailElem.innerText = user.email;
-    if(addressElem) addressElem.innerText = user.address;
-
-    const editName = document.getElementById('edit-name');
-    const editEmail = document.getElementById('edit-email');
-    const editAddress = document.getElementById('edit-address');
-    if(editName) editName.value = user.name;
-    if(editEmail) editEmail.value = user.email;
-    if(editAddress) editAddress.value = user.address;
-}
-
-function saveProfile(e){
-    e.preventDefault();
-    user.name = document.getElementById('edit-name').value;
-    user.email = document.getElementById('edit-email').value;
-    user.address = document.getElementById('edit-address').value;
-    localStorage.setItem('user', JSON.stringify(user));
-    alert('Profile updated!');
-    window.location.href = 'profile.html';
-}
-
-document.addEventListener('DOMContentLoaded', () => {
-    loadCart();
-    updateCheckout();
-    loadProfile();
-
-    const editForm = document.getElementById('editForm');
-    if(editForm) editForm.addEventListener('submit', saveProfile);
-});
-
